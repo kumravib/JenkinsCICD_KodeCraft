@@ -65,7 +65,7 @@ pipeline {
                       git pull
                       cd ..
                       sed -i "s/dockerImageTag: .*/dockerImageTag: \"${dockerImageTag}\"/" ${helmChartPath}/values.yaml
-                      cd ArgoCD_Legro
+                      cd ArgoCD_Demo
                       pwd
                       git add charts/myapp/values.yaml
                       git commit -m "Update image tag in values.yaml"
