@@ -4,7 +4,7 @@ pipeline {
         maven 'Maven'
     }
     environment {
-        registry = "941377152740.dkr.ecr.us-east-1.amazonaws.com/argocd/ravi"
+        registry = "941377152740.dkr.ecr.us-east-1.amazonaws.com/ravi"
         dockerImageTag = "${env.BUILD_NUMBER}"
     }
     stages {
