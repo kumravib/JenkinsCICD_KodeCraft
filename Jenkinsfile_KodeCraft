@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Code Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token-jenkins', url: 'https://github.com/kumravib/JenkinsCICD_KodeCraft.git']])
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'git_hub', url: 'https://github.com/kumravib/JenkinsCICD_KodeCraft.git']])
             }
         }
         stage('Build and Test') {
@@ -21,10 +21,10 @@ pipeline {
         }
         stage('Static Code Analysis') {
         environment {
-            SONAR_URL = "http://52.90.186.225:9000/"
+            SONAR_URL = "http://3.21.27.252:9000/"
               }
          steps {
-             withCredentials([string(credentialsId: 'sonartoken', variable: 'SONAR_AUTH_TOKEN')]) {
+             withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
                sh 'mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
             }
            }
@@ -53,7 +53,7 @@ pipeline {
                helmChartPath = "ArgoCD_Demo/charts/myapp"
              }
             steps {
-                withCredentials([usernamePassword(credentialsId: 'github-token-jenkins',
+                withCredentials([usernamePassword(credentialsId: 'git-hub',
                                                    usernameVariable: 'GITHUB_USER',
                                                    passwordVariable: 'GITHUB_TOKEN')]) {
                     sh'''
